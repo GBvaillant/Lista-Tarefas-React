@@ -10,7 +10,7 @@
  .app {
    max-width: 600px;
    margin: 0 auto;
-   background-color: #9D8771;
+   background-color: #ebccac;
    padding: 20px 30px;
    border-radius: 5px;
  }
@@ -29,6 +29,7 @@
 
  input {
    box-sizing: border-box;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
  }
 
  button {
@@ -46,11 +47,11 @@
  .todo-list {
    margin-bottom: 20px;
    padding-bottom: 20px;
-   border-bottom: 1px solid #fff;
+   border-bottom: 1px solid #333;
  }
 
  .todo {
-   background-color: #fff;
+   background-color: #ebccac;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
    padding: 10px;
    margin-bottom: 10px;
@@ -81,8 +82,44 @@
  select {
    padding: 5px;
    margin-bottom: 10px;
-   border: 1px solid #fff;
+   border: 1px solid #ebccac;
    border-radius: 5px;
    width: 100%;
+   background-color: #ebccac;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
+ }
+
+ .category {
+   font-weight: bold;
+   display: flex;
+   align-items: center;
+   color: #333;
+
+ }
+
+ .category span {
+   display: flex;
+   width: 6px;
+   height: 6px;
+   border-radius: 50%;
+   background-color: #333;
+   margin-right: 6px;
+ }
+
+ .filter,
+ .search {
+   border-bottom: 1px solid #333;
+   margin-bottom: 20px;
+   padding-bottom: 20px;
+ }
+
+ .filter-options {
+   display: flex;
+   justify-content: space-between;
+   gap: 3rem;
+ }
+
+ .filter-options div {
+   flex: 1 1 0;
  }

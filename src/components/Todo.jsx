@@ -1,18 +1,32 @@
 import React from 'react'
+import { RiDeleteBinLine, RiCheckLine } from 'react-icons/ri'
 
-const Todo = ({ todo }) => {
+const Todo = ({ todo, removeTodo, completeTodo }) => {
 
 
     return (
         <div>
-            <div className='todo'>
+            <div className='todo'
+                style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
                 <div className='content'>
                     <p>{todo.text}</p>
-                    <p className='category'>({todo.category})</p>
+                    <p className='category'>
+                        <span></span>{todo.category}
+                    </p>
                 </div>
                 <div>
-                    <button className='complete'>Completar</button>
-                    <button className='remove'>x</button>
+                    <button
+                        className='complete'
+                        onClick={() => completeTodo(todo.id)}>
+                        <RiCheckLine />
+
+                    </button>
+                    <button
+                        className='remove'
+                        onClick={() => removeTodo(todo.id)}>
+                        <RiDeleteBinLine />
+
+                    </button>
                 </div>
             </div>
 
