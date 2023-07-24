@@ -1,36 +1,63 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import { RiDeleteBinLine, RiCheckLine } from 'react-icons/ri'
 
-const Todo = ({ todo, removeTodo, completeTodo }) => {
+const Todo = () => {
+
+    const [task, setTask] = useState([])
+
+    const getTasks = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/task')
+            const data = response.data
+
+            setTask(data)
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getTasks()
+    }, [])
+
 
 
     return (
         <div>
-            <div className='todo'
-                style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}>
-                <div className='content'>
-                    <p>{todo.text}</p>
-                    <p className='category'>
-                        <span></span>{todo.category}
-                    </p>
-                </div>
-                <div>
-                    <button
-                        className='complete'
-                        onClick={() => completeTodo(todo.id)}>
-                        <RiCheckLine />
+            <div className='todo-list'>
+                <div className='todo'>
+                    {
+                        task.map((task) => (
 
-                    </button>
-                    <button
-                        className='remove'
-                        onClick={() => removeTodo(todo.id)}>
-                        <RiDeleteBinLine />
+                            <div className='content' key={task.id}>
+                                <p>{task.text}</p>
+                                <p className='category'>
+                                    <span></span>{task.category}
+                                </p>
+                            </div>
+                        ))
+                    }
+                    <div>
+                        <button
+                            className='complete'
+                            onClick={() => completeTodo(task.id)}>
+                            <RiCheckLine />
 
-                    </button>
+                        </button>
+                        <button
+                            className='remove'
+                            onClick={() => removeTodo(task.id)}>
+                            <RiDeleteBinLine />
+
+                        </button>
+                    </div>
                 </div>
             </div>
 
-        </div>
+        </div >
     )
 }
 
