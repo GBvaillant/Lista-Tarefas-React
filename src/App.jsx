@@ -6,6 +6,7 @@ import TodoForm from './components/TodoForm'
 import Search from './components/Search'
 import Filter from './components/Filter'
 import axios from 'axios'
+import taskFetch from './axios/config'
 
 function App() {
 
@@ -15,40 +16,35 @@ function App() {
   const [sort, setSort] = useState('Asc')
 
 
+  const [task, setTask] = useState([])
 
-  // const addTodo = (text, category) => {
-  //   const newTodos = [
-  //     ...todos,
-  //     {
-  //       id: Math.floor(Math.random() * 10000),
-  //       text,
-  //       category,
-  //       isCompleted: false,
-  //     }
-  //   ]
-  //   setTodos(newTodos)
-  // }
+  const getTasks = async () => {
+    try {
+      const response = await taskFetch.get('/task')
 
-  // const removeTodo = (id) => {
-  //   const newTodos = [...todos]
-  //   const filteredTodos = newTodos.filter((todo) =>
-  //     todo.id !== id ? todo : null
-  //   )
-  //   setTodos(filteredTodos)
-  // }
+      const data = response.data
 
-  // const completeTodo = (id) => {
-  //   const newTodos = [...todos]
-  //   newTodos.map((todo) =>
-  //     todo.id === id ? (todo.isCompleted = !todo.isCompleted) : todo
-  //   )
-  //   setTodos(newTodos)
-  // }
+      setTask(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  useEffect(() => {
+    getTasks()
+  }, [])
+
+  
 
   return (
     <div className='app'>
       <h1>Lista de Tarefas</h1>
-      <Todo />
+      <Search />
+      <Filter />
+      <div className='todo-list'>
+        {task.map((task) => (
+          <Todo task={task} />
+        ))}
+      </div>
       <TodoForm />
     </div>
   )

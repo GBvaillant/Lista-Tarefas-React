@@ -1,16 +1,24 @@
 import { useState } from 'react'
 
-const TodoForm = ({ addTodo }) => {
+import taskFetch from '../axios/config'
 
-    const [value, setValue] = useState('')
-    const [category, setCategory] = useState('')
+const TodoForm = () => {
 
-    const handleSubmit = (e) => {
+    // const [value, setValue] = useState('')
+    // const [category, setCategory] = useState('')
+
+    const [text, setText] = useState()
+    const [category, setCategory] = useState()
+
+    const handleSubmit = async (e) => { 
         e.preventDefault()
-        if (!value || !category) return
-        addTodo(value, category)
-        setValue('')
-        setCategory('')
+        
+        const task = {text, category, complete: false}
+
+        await taskFetch.post('/task', { 
+            body: task,
+        })
+
     }
 
     return (
@@ -20,8 +28,8 @@ const TodoForm = ({ addTodo }) => {
                 <input
                     type="text"
                     placeholder='Adicionar Tarefa'
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
                 />
                 <select value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option value="">Selecione uma categoria</option>
