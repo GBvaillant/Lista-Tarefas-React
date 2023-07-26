@@ -23,17 +23,16 @@ function App() {
       const response = await taskFetch.get('/task')
 
       const data = response.data
-
       setTask(data)
+
     } catch (err) {
       console.log(err)
     }
-  }
+  } 
   useEffect(() => {
     getTasks()
-  }, [])
+  }, [task])
 
-  
 
   return (
     <div className='app'>
@@ -42,7 +41,7 @@ function App() {
       <Filter />
       <div className='todo-list'>
         {task.map((task) => (
-          <Todo task={task} />
+          <Todo key={task._id} task={task} />
         ))}
       </div>
       <TodoForm />
