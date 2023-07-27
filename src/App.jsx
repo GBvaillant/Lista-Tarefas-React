@@ -28,7 +28,7 @@ function App() {
     } catch (err) {
       console.log(err)
     }
-  } 
+  }
   useEffect(() => {
     getTasks()
   }, [task])
@@ -37,12 +37,24 @@ function App() {
   return (
     <div className='app'>
       <h1>Lista de Tarefas</h1>
-      <Search />
-      <Filter />
+      <Search search={search} setSearch={setSearch} />
+      <Filter filter={filter} setFilter={setFilter} task={task} />
       <div className='todo-list'>
-        {task.map((task) => (
-          <Todo key={task._id} task={task} />
-        ))}
+        {
+          task
+            .filter((task) =>
+              filter === "All"
+                ? true
+                : filter === task.complete 
+                  ? task.complete
+                  : !task.complete
+                  )
+            .filter((task) =>
+              task.text.toLowerCase().includes(search.toLowerCase()))
+            .map((task) => (
+              <Todo key={task._id} task={task} />
+            ))
+        }
       </div>
       <TodoForm />
     </div>

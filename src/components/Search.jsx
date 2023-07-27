@@ -1,6 +1,3 @@
-import { PiMagnifyingGlass } from 'react-icons/pi'
-
-
 function Search({ search, setSearch }) {
     return (
         <div className="search">
