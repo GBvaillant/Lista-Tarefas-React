@@ -16,6 +16,8 @@ function App() {
   const [sort, setSort] = useState('Asc')
 
 
+
+
   const [task, setTask] = useState([])
 
   const getTasks = async () => {
@@ -33,27 +35,25 @@ function App() {
     getTasks()
   }, [task])
 
-
   return (
     <div className='app'>
       <h1>Lista de Tarefas</h1>
       <Search search={search} setSearch={setSearch} />
-      <Filter filter={filter} setFilter={setFilter} task={task} />
+      <Filter filter={filter} setFilter={setFilter} />
       <div className='todo-list'>
-        {
-          task
-            .filter((task) =>
-              filter === "All"
-                ? true
-                : filter === task.complete 
-                  ? task.complete
-                  : !task.complete
-                  )
-            .filter((task) =>
-              task.text.toLowerCase().includes(search.toLowerCase()))
-            .map((task) => (
-              <Todo key={task._id} task={task} />
-            ))
+        {task
+          .filter((task) =>
+            filter === "All"
+              ? true
+              : filter === "completed"
+                ? task.complete
+                : !task.complete
+          )
+          .filter((task) =>
+            task.text.toLowerCase().includes(search.toLowerCase()))
+          .map((task) => (
+            <Todo key={task._id} task={task} />
+          ))
         }
       </div>
       <TodoForm />
