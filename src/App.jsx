@@ -1,11 +1,10 @@
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import './App.css'
-
 import Todo from './components/Todo'
 import TodoForm from './components/TodoForm'
 import Search from './components/Search'
 import Filter from './components/Filter'
-import axios from 'axios'
 import taskFetch from './axios/config'
 
 function App() {
@@ -13,10 +12,6 @@ function App() {
   const [search, setSearch] = useState('')
 
   const [filter, setFilter] = useState('All')
-  const [sort, setSort] = useState('Asc')
-
-
-
 
   const [task, setTask] = useState([])
 
@@ -36,28 +31,31 @@ function App() {
   }, [task])
 
   return (
-    <div className='app'>
+    <Router>
+      <div className='app'>
       <h1>Lista de Tarefas</h1>
-      <Search search={search} setSearch={setSearch} />
-      <Filter filter={filter} setFilter={setFilter} />
-      <div className='todo-list'>
-        {task
-          .filter((task) =>
-            filter === "All"
-              ? true
-              : filter === "completed"
-                ? task.complete
-                : !task.complete
-          )
-          .filter((task) =>
-            task.text.toLowerCase().includes(search.toLowerCase()))
-          .map((task) => (
-            <Todo key={task._id} task={task} />
-          ))
-        }
+        <Search search={search} setSearch={setSearch} />
+        <Filter filter={filter} setFilter={setFilter} />
+        <div className='todo-list'>
+          {task
+            .filter((task) =>
+              filter === "All"
+                ? true
+                : filter === "completed"
+                  ? task.complete
+                  : !task.complete
+            )
+            .filter((task) =>
+              task.text.toLowerCase().includes(search.toLowerCase()))
+            .map((task) => (
+              <Todo key={task._id} task={task} />
+            ))
+          }
+        </div>
+        <TodoForm />
       </div>
-      <TodoForm />
-    </div>
+    </Router>
+
   )
 }
 
