@@ -1,23 +1,25 @@
+import { Link } from 'react-router-dom'
+import '../forms/LoginForm.css'
+
+
 const LoginForm = () => {
     return (
-        <div>
-            <h2>Login</h2>
-            <div>
+        <div className='container'>
+            <div className='loginForm'>
+                <img src='../../src/img/pngTask.png' alt="taskLog" />
                 <form action="">
                     <div>
-                        <input type="text" placeholder="Digite o username" />
+                        <input className='inputLogin' type="text" placeholder="Username" />
                     </div>
                     <div>
-                        <input type="password" placeholder="Digite a sua senha" />
+                        <input className='inputLogin' type="password" placeholder="Senha" />
                     </div>
                 </form>
-                <button type="submit">Login</button>
+                <button className='buttonLogin' type="submit">Login</button>
+                <p>clique <Link to='/register'>aqui</Link> para criar uma conta !</p>
             </div>
-
         </div >
     )
-
-
 }
 
 export default LoginForm

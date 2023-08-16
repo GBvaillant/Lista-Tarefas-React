@@ -47,7 +47,6 @@ const Todo = ({ task }) => {
 
     return (
         <div>
-            <h1>Lista de Tarefas</h1>
             <div className='todo'
                 style={{ textDecoration: task.complete ? "line-through" : "" }}>
                 <div className='content' key={task.id}>

@@ -1,59 +1,19 @@
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Todo from './components/Todo'
-import TodoForm from './components/TodoForm'
-import Search from './components/Search'
-import Filter from './components/Filter'
-import taskFetch from './axios/config'
+import Login from './components/pages/Login'
+import Home from './components/pages/Home'
+import RegisterForm from './components/forms/RegisterForm'
 
 function App() {
 
-  const [search, setSearch] = useState('')
-
-  const [filter, setFilter] = useState('All')
-
-  const [task, setTask] = useState([])
-
-  const getTasks = async () => {
-    try {
-      const response = await taskFetch.get('/task')
-
-      const data = response.data
-      setTask(data)
-
-    } catch (err) {
-      console.log(err)
-    }
-  }
-  useEffect(() => {
-    getTasks()
-  }, [task])
-
   return (
     <Router>
-      <div className='app'>
-      <h1>Lista de Tarefas</h1>
-        <Search search={search} setSearch={setSearch} />
-        <Filter filter={filter} setFilter={setFilter} />
-        <div className='todo-list'>
-          {task
-            .filter((task) =>
-              filter === "All"
-                ? true
-                : filter === "completed"
-                  ? task.complete
-                  : !task.complete
-            )
-            .filter((task) =>
-              task.text.toLowerCase().includes(search.toLowerCase()))
-            .map((task) => (
-              <Todo key={task._id} task={task} />
-            ))
-          }
-        </div>
-        <TodoForm />
-      </div>
+      <Routes>
+        <Route exact path='/' element={<Login />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/register' element={<RegisterForm />} />
+      </Routes>
+
     </Router>
 
   )
