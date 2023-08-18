@@ -1,6 +1,3 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
 import { RiDeleteBinLine, RiCheckLine } from 'react-icons/ri'
 import { MdSettingsBackupRestore } from 'react-icons/md'
 import taskFetch from '../axios/config'
