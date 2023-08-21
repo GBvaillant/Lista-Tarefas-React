@@ -51,7 +51,9 @@ h1 {
     cursor: pointer;
     opacity: 0.7;
     transition: 0.3s;
-    margin-right: 10px;
-    width: 25vh;
+    /* margin-right: 10px; */
+    width: 20vh;
     font-size: medium;
+    
+
 }

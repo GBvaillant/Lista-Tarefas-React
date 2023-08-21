@@ -8,24 +8,27 @@ const RegisterForm = () => {
     const [username, setUserName] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [confirmPass, setConfirmPass] = useState()
+
+
 
     const handleSubmit = async (e) => {
-        e.prefentDefault()
+        e.preventDefault()
 
-        await taskFetch.post("/createUser", {
+        const FormData = {
             username: username,
             email: email,
             password: password,
-        })
-            .then((response) =>
-                console.log(response))
-            .catch((err) => {
-                console.log(err)
-            })
+            confirmPass: confirmPass
+        }
 
-        setUserName('')
-        setEmail('')
-        setPassword('')
+        try {
+            const response = await taskFetch.post("/createUser", FormData)
+            console.log('cadastro realizado', response.data)
+            alert('Usuário criado com sucesso!!')
+        } catch (err) {
+            console.log('error: ', err)
+        }
 
     }
     return (
@@ -54,14 +57,21 @@ const RegisterForm = () => {
                             className='inputRegister'
                             type="password"
                             placeholder="Password"
+                            autoComplete='on'
                             value={password || ''}
                             onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div>
-                        <input className='inputRegister' type="password" placeholder="Confirm password" name='confirmPass' />
+                        <input className='inputRegister'
+                            type="password"
+                            placeholder="Confirm password"
+                            value={confirmPass || ''}
+                            onChange={(e) => setConfirmPass(e.target.value)}
+                            autoComplete='on' />
+
                     </div>
+                    <button type='submit' className='buttonRegister'>Register</button>
                 </form>
-                <button className='buttonRegister'>Register</button>
                 <p>Já possui cadastro ? Faça o <Link to='/'> login</Link> </p>
             </div>
         </div>

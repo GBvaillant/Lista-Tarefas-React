@@ -12,7 +12,7 @@ const LoginForm = () => {
                         <input className='inputLogin' type="text" placeholder="Username" />
                     </div>
                     <div>
-                        <input className='inputLogin' type="password" placeholder="Senha" />
+                        <input className='inputLogin' type="password" autoComplete='on' placeholder="Senha" />
                     </div>
                 </form>
                 <button className='buttonLogin' type="submit">Login</button>
