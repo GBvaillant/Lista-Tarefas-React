@@ -22,6 +22,8 @@ const RegisterForm = () => {
             confirmPass: confirmPass
         }
 
+        confirmPass ==! password ? alert('Senhas não conferem') : ""
+
         try {
             const response = await taskFetch.post("/createUser", FormData)
             console.log('cadastro realizado', response.data)
@@ -62,7 +64,8 @@ const RegisterForm = () => {
                             onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div>
-                        <input className='inputRegister'
+                        <input
+                            className='inputRegister'
                             type="password"
                             placeholder="Confirm password"
                             value={confirmPass || ''}
