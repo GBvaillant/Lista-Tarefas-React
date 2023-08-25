@@ -10,8 +10,6 @@ const RegisterForm = () => {
     const [password, setPassword] = useState()
     const [confirmPass, setConfirmPass] = useState()
 
-
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -21,8 +19,6 @@ const RegisterForm = () => {
             password: password,
             confirmPass: confirmPass
         }
-
-        confirmPass ==! password ? alert('Senhas não conferem') : ""
 
         try {
             const response = await taskFetch.post("/createUser", FormData)
@@ -71,6 +67,7 @@ const RegisterForm = () => {
                             value={confirmPass || ''}
                             onChange={(e) => setConfirmPass(e.target.value)}
                             autoComplete='on' />
+                        {confirmPass == !password ? alert('Senhas não conferem') : ""}
 
                     </div>
                     <button type='submit' className='buttonRegister'>Register</button>
