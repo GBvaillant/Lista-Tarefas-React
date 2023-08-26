@@ -18,7 +18,7 @@ const Todo = ({ task }) => {
     }
 
     const completeTask = async (id) => {
-        await taskFetch.patch(`/task/${id}`, {
+        await taskFetch.put(`/updateTask/${id}`, {
             id: id,
             complete: true
         })
@@ -31,7 +31,7 @@ const Todo = ({ task }) => {
     }
 
     const returnTask = async (id) => {
-        await taskFetch.patch(`/task/${id}`, {
+        await taskFetch.put(`/updateTask/${id}`, {
             id: id,
             complete: false
         })

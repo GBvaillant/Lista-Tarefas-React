@@ -15,7 +15,7 @@ const Home = () => {
 
     const getTasks = async () => {
         try {
-            const response = await taskFetch.get('/task')
+            const response = await taskFetch.get('/')
 
             const data = response.data
             setTask(data)

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import '../forms/LoginForm.css'
 import { useState } from 'react'
 import taskFetch from '../../axios/config'
@@ -9,6 +9,8 @@ const LoginForm = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    const navigate = useNavigate()
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -19,8 +21,10 @@ const LoginForm = () => {
 
         try {
             await taskFetch.post("/login", formLogin)
+            !username | !password ? alert('Preencha todos os campos') : ''
             console.log('Usuário autenticado')
             alert('User autenticado')
+            navigate('/home')
         } catch (err) {
             console.log('error: ', err)
         }
@@ -29,6 +33,7 @@ const LoginForm = () => {
         <div className='container'>
             <div className='loginForm'>
                 <img src='../../src/img/pngTask.png' alt="taskLog" />
+
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div>
                         <input
